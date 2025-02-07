@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 public class FrmEstadistica extends JFrame {
+    private JTextField txtDato;
+    private JList lstMuestra;
 
     public FrmEstadistica() {
         setSize(400, 300);
@@ -25,7 +27,7 @@ public class FrmEstadistica extends JFrame {
         lblDato.setBounds(10, 10, 100, 25);
         getContentPane().add(lblDato);
 
-        JTextField txtDato = new JTextField();
+        txtDato = new JTextField();
         txtDato.setBounds(80, 10, 100, 25);
         getContentPane().add(txtDato);
 
@@ -41,7 +43,7 @@ public class FrmEstadistica extends JFrame {
         btnQuitar.setBounds(80, 70, 100, 25);
         getContentPane().add(btnQuitar);
 
-        JList lstMuestra = new JList();
+        lstMuestra = new JList();
         JScrollPane spMuestra = new JScrollPane(lstMuestra);
         spMuestra.setBounds(210, 40, 100, 150);
         getContentPane().add(spMuestra);
@@ -61,7 +63,7 @@ public class FrmEstadistica extends JFrame {
         txtEstadistica.setBounds(210, 200, 100, 25);
         getContentPane().add(txtEstadistica);
 
-        btnAgregar .addActionListener(new ActionListener(){
+        btnAgregar.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,7 +71,7 @@ public class FrmEstadistica extends JFrame {
             }
 
         });
-        btnQuitar .addActionListener(new ActionListener(){
+        btnQuitar.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,11 +81,27 @@ public class FrmEstadistica extends JFrame {
         });
     }
 
-    private void agregarDato(){
-        JOptionPane.showMessageDialog(null,"Hizo click en AGREGAR");
+    private double[] muestra = new double[1000];
+    private int totalDatos=-1;
+
+    private void agregarDato() {
+        double dato= Double.parseDouble(txtDato.getText());
+        totalDatos++;
+        muestra[totalDatos]=dato;
+    
+
     }
-    private void quitarDato(){
-        JOptionPane.showMessageDialog(null,"Hizo click en QUITAR");
+
+    private void mostrarMuestra(){
+        String[] strMuestra=new String[totalDatos];
+        for (int i=0,i<=totalDatos; i++) {
+            strMuestra[i]= String.valueOf(muestra [i]) ;
+        }
+        lstMuestra.setListData(strMuestra);
+
+    }
+
+    private void quitarDato() {
 
     }
 }
